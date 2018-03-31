@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vector.h                                         .::    .:/ .      .::   */
+/*   vector2.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ghazette <ghazette@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/23 17:20:39 by ghazette     #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/31 17:03:11 by ghazette    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/03/31 17:01:33 by ghazette     #+#   ##    ##    #+#       */
+/*   Updated: 2018/03/31 17:01:53 by ghazette    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
-# include <math.h>
+#include "../includes/vector.h"
 
-typedef struct	s_vec3
+void	vec3_normalize(t_vec3 *v)
 {
-	double x;
-	double y;
-	double z;
+	double mag;
 
-}				t_vec3;
+	mag = vec3_magnitude(v);
+	v->x /= mag;
+	v->y /= mag;
+	v->z /= mag;
+}
 
-void			vec3_normalize(t_vec3 *v);
-double			vec3_length(t_vec3 *v1, t_vec3 *v2);
-void			vec3_add(t_vec3 *v1, t_vec3 *v2, t_vec3 *res);
-void			vec3_sub(t_vec3 *v1, t_vec3 *v2, t_vec3 *res);
-double			vec3_magnitude(t_vec3 *v);
-void			vec3_crossproduct(t_vec3 *v1, t_vec3 *v2, t_vec3 *res);
-void			vec3_scale(t_vec3 *v, double multiple);
+double	vec3_length(t_vec3 *v1, t_vec3 *v2)
+{
+	t_vec3 v3;
 
-#endif
+	vec3_sub(v2, v1, &v3);
+	return (vec3_magnitude(&v3));
+}

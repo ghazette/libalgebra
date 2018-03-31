@@ -6,7 +6,7 @@
 /*   By: ghazette <ghazette@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/23 17:19:07 by ghazette     #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/23 19:08:04 by ghazette    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/31 17:03:18 by ghazette    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,15 +27,31 @@ void	vec3_sub(t_vec3 *v1, t_vec3 *v2, t_vec3 *res)
 	res->z = v1->z - v2->z;
 }
 
-double	vec3_norm(t_vec3 *v1)
+double	vec3_magnitude(t_vec3 *v)
 {
-	return (sqrt((v1->x * v1->x) + (v1->y * v1->y) + (v1->z * v1->z)));
+	return (sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z)));
 }
 
-double	vec3_length(t_vec3 *v1, t_vec3 *v2)
+void	vec3_crossproduct(t_vec3 *v1, t_vec3 *v2, t_vec3 *res)
 {
-	t_vec3 v3;
+	res->x = (v1->y * v2->z) - (v1->z * v2->y);
+	res->y = (v1->z * v2->x) - (v1->x * v2->z);
+	res->z = (v1->x * v2->y) - (v1->y * v2->x);
+}
 
-	vec3_sub(v2, v1, &v3);
-	return (vec3_norm(&v3));
+void	vec3_scale(t_vec3 *v, double multiple)
+{
+	if (multiple < 0)
+	{
+		multiple = -multiple;
+		v->x /= multiple;
+		v->y /= multiple;
+		v->z /= multiple;
+	}
+	else
+	{
+		v->x *= multiple;
+		v->y *= multiple;
+		v->z *= multiple;
+	}
 }
