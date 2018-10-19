@@ -1,51 +1,51 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vector2.c                                        .::    .:/ .      .::   */
+/*   vector3.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ghazette <ghazette@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/31 17:01:33 by ghazette     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/04 18:40:01 by ghazette    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/04/11 09:30:33 by ghazette     #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/19 14:51:35 by ghazette    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/libalgebra.h"
 
-t_vec3	*vec3_normalize(t_vec3 *v)
+void	vec3_reverse(t_vec3 *v)
 {
-	double mag;
-
-	mag = vec3_magnitude(v);
-	v->x /= mag;
-	v->y /= mag;
-	v->z /= mag;
-	return (v);
+	v->x = -v->x;
+	v->y = -v->y;
+	v->z = -v->z;
 }
 
-double	vec3_length(t_vec3 *v1, t_vec3 *v2)
+double	vec3_scalarproduct(t_vec3 *v1, double n)
 {
-	t_vec3 v3;
-
-	vec3_sub(v2, v1, &v3);
-	return (vec3_magnitude(&v3));
+	return (v1->x * n + v1->y * n + v1->z * n);
 }
 
-t_vec3	*vector3d(t_vec3 *v, double x, double y, double z)
+t_vec3	*vec3_mult(t_vec3 *v1, t_vec3 *v2, t_vec3 *res)
 {
-	v->x = x;
-	v->y = y;
-	v->z = z;
-	return (v);
+	res->x = v1->x * v2->x;
+	res->y = v1->y * v2->y;
+	res->z = v1->z * v2->z;
+	return (res);
 }
 
-double	vec3_sqrlength(t_vec3 *vec)
+void	vec3_normalizeby(t_vec3 *v, double n)
 {
-	return (vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+	if (v->x != 0)
+		v->x /= n;
+	if (v->y != 0)
+		v->y /= n;
+	if (v->z != 0)
+		v->z /= n;
 }
 
-double	vec3_dotproduct(t_vec3 *v1, t_vec3 *v2)
+void	vec3_cpy(t_vec3 *dest, t_vec3 *src)
 {
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+	dest->x = src->x;
+	dest->y = src->y;
+	dest->z = src->z;
 }
